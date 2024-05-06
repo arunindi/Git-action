@@ -31,11 +31,11 @@ jobs:
         KUBECONFIG: ${{ runner.workspace }}/.kube/config
 
     - name: Pull Docker image from DockerHub
-      run: docker pull your-dockerhub-username/your-image-name:latest
+      run: docker pull aindi123/hello-world-python:0.0.1.RELEASE
 
     - name: Set Docker image tag
       run: |
-        echo ::set-env name=IMAGE_TAG::your-dockerhub-username/your-image-name:latest
+        echo ::set-env name=IMAGE_TAG::aindi123/hello-world-python:0.0.1.RELEASE
 
     - name: Deploy container to Minikube
       run: |
