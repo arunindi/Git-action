@@ -19,4 +19,11 @@ jobs:
       run: echo "IMAGE_TAG=aindi123/hello-world-python:0.0.1.RELEASE" >> $GITHUB_ENV
 
     - name: Run Docker container
-      run: docker run -d -p 8080:8080 ${{ env.IMAGE_TAG }} > container_logs.txt
+      run: docker run -d -p 8080:8080 ${{ env.IMAGE_TAG }}
+
+    - name: Pull Trivy Docker image
+      run: docker pull aquasec/trivy:latest
+
+    - name: Scan Docker image with Trivy
+      run: |
+        docker run --rm -v $(pwd):/workdir aquasec/trivy:latest --quiet image ${{ env.IMAGE_TAG }} > scan_results.txt
